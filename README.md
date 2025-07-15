@@ -39,8 +39,6 @@ Developers experimenting with symbolic math in JavaScript
 
 Anyone curious about how math operations can be visualized and explained
 
-📸 Screenshots
-(Add screenshots of the calculator interface and a sample step-by-step output here)
 
 📄 License
 This project is open-source and free to use. You can add a specific license if needed.
@@ -48,4 +46,4 @@ This project is open-source and free to use. You can add a specific license if n
 👨‍💻 Author
 Deepak Kumar Yadav
 📧 py7043178@gmail.com
-🔗 GitHub Profile
+🔗 https://github.com/AgentDeepak007
