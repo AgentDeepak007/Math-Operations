@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integral Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;
+            background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        .navbar {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+        .brand {
+            float: left;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+        .nav-list {
+            list-style: none;
+            float: right;
+            margin-right: 20px;
+        }
+        .nav-list li {
+            display: inline;
+            margin-left: 20px;
+        }
+        .nav-list a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .nav-list a:hover {
+            text-decoration: underline;
+        }
+        .hero {
+            background: url('https://source.unsplash.com/random/1600x900') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+        }
+        .hero h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .btn {
+            background: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .calculator {
+            padding: 50px 0;
+            text-align: center;
+        }
+        .calculator form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        .result, .steps {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        .steps {
+            font-size: 1em;
+        }
+        .error {
+            color: red;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="brand">IntegralCalculator</div>
+                <ul class="nav-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#calculator">Calculator</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>Welcome to Integral Calculator</h1>
+                <p>Calculate integrals with step-by-step solutions.</p>
+                <a href="#calculator" class="btn">Get Started</a>
+            </div>
+        </section>
+    </header>
+    <main>
+        <section class="calculator" id="calculator">
+            <div class="container">
+                <h2 style="color: white;">Integral Calculator</h2>
+                <form id="integral-form">
+                    <div class="form-group">
+                        <label for="function">Function (in terms of x):</label>
+                        <input type="text" id="function" placeholder="e.g. x^2 + 2*x + 1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lower-limit">Lower Limit (a):</label>
+                        <input type="number" id="lower-limit" placeholder="e.g. 0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="upper-limit">Upper Limit (b):</label>
+                        <input type="number" id="upper-limit" placeholder="e.g. 1" required>
+                    </div>
+                    <button type="submit" class="btn">Calculate Integral</button>
+                </form>
+                <div class="result" id="result"></div>
+                <div class="steps" id="steps"></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>© 2024 IntegralCalc. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        function calculateIntegral() {
+            const funcStr = document.getElementById('function').value;
+            const lowerLimit = parseFloat(document.getElementById('lower-limit').value);
+            const upperLimit = parseFloat(document.getElementById('upper-limit').value);
+            
+            const func = new Function('x', `return ${funcStr}`);
+
+            const n = 1000; // Number of trapezoids
+            const h = (upperLimit - lowerLimit) / n;
+            let sum = 0.5 * (func(lowerLimit) + func(upperLimit));
+
+            for (let i = 1; i < n; i++) {
+                const x = lowerLimit + i * h;
+                sum += func(x);
+            }
+
+            const integral = sum * h;
+
+            const resultDiv = document.getElementById('result');
+            const stepsDiv = document.getElementById('steps');
+
+            resultDiv.innerHTML = `
+                <h3>Calculated Integral</h3>
+                <p>∫ f(x) dx from ${lowerLimit} to ${upperLimit} ≈ ${integral.toFixed(3)}</p>
+            `;
+
+            stepsDiv.innerHTML = `
+                <h3>Solution Steps</h3>
+                <ol>
+                    <li>Function: ${funcStr}</li>
+                    <li>Lower Limit (a): ${lowerLimit}</li>
+                    <li>Upper Limit (b): ${upperLimit}</li>
+                    <li>Number of trapezoids: 1000</li>
+                    <li>Integral ≈ ${integral.toFixed(3)}</li>
+                </ol>
+            `;
+        }
+
+        document.getElementById('integral-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            calculateIntegral();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laplace Transform Calculator</title>
+    <style>
+        body {
+            background-image: url(https://wallpapers.com/images/hd/wise-math-operation-symbols-abstract-xia9fh4gmz33vug5.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        } 
+        .body-laplace {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin-top: 30px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .navigation {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .navigation ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;    
+            display: flex;
+            justify-content: center;
+        }
+        .navigation li {
+            margin: 0 12px;
+        }
+        .navigation li a, .navigation li button {
+            text-decoration: none;
+            color: black;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .navigation li button {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .navigation li a:hover, .navigation li button:hover {
+            background-color: green;
+            color: white;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        footer {
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-nav">
+        <header>
+            <nav class="navigation" id="navbar">
+                <ul>
+                    <li><button class="dropbtn1" style="list-style: none;"><a href="Home.html">Home</a></button></li>
+                    <li><button class="dropbtn2">About Us</button></li>
+                    <li class="dropdown">
+                        <button class="dropbtn">Contact Us</button>
+                        <div class="dropdown-content">
+                            <a href="#">Instagram</a>
+                            <a href="#">Facebook</a>
+                            <a href="#">Whatsapp</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <div class="description">
+        <p style="font-family: cursive;font-size: 5ch;color: white;text-align: center;text-shadow: 3px 4px 5px black; margin-top: -10px;margin-top: 12px;">Laplace Transform Calculator</p>
+        <p style="font-family: cursive;font-size: 3ch;color: white;text-align: center;text-shadow: 3px 4px 5px black; margin-top: -20px;margin-top: 12px;">This intuitive and easy-to-use tool is designed to help you calculate the Laplace transform of any function.<br>
+            Features:<br>
+
+            Function Input: Enter any mathematical function in terms of t.<br>
+            Laplace Transform: Calculate the Laplace transform of the function.<br>
+            Accurate Results: Our calculator uses numerical integration for precise results.<br>
+            User-Friendly Interface: Clean design and simple inputs make it easy for anyone to use.<br></p>
+    </div>
+    <div class="body-laplace" style="margin-top: -200px;">
+        <div class="container">
+            <div class="input-group">
+                <label for="function">Function (in terms of t):</label>
+                <input type="text" id="function" placeholder="e.g. t*t + 2*t + 1">
+            </div>
+            <div class="input-group">
+                <label for="s-value">Value of s:</label>
+                <input type="number" id="s-value" placeholder="e.g. 1">
+            </div>
+            <button onclick="calculateLaplace()" style="width: 100%;height: 40px;background-color: orangered;color: white;">Calculate Laplace Transform</button>
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+    <footer>
+        © 2024 Math Operations. All rights reserved.
+    </footer>
+    <script>
+        function calculateLaplace() {
+            const funcStr = document.getElementById('function').value;
+            const s = parseFloat(document.getElementById('s-value').value);
+            
+            const func = new Function('t', `return ${funcStr}`);
+
+            const n = 100000; // Number of steps for numerical integration
+            const dt = 0.00001; // Step size
+            let sum = 0;
+
+            for (let i = 0; i < n; i++) {
+                const t = i * dt;
+                sum += func(t) * Math.exp(-s * t) * dt;
+            }
+
+            const laplaceTransform = sum.toFixed(5); // Limiting to 5 decimal places for clarity
+
+            document.getElementById('result').textContent = `Laplace Transform (s = ${s}) ≈ ${laplaceTransform}`;
+        }
+    </script>
+</body>
+</html>

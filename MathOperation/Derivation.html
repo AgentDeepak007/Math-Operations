@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derivative Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-image: url(https://wallpapers.com/images/hd/wise-math-operation-symbols-abstract-xia9fh4gmz33vug5.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .navigation {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .navigation ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;    
+            display: flex;
+            justify-content: center;
+        }
+        .navigation li {
+            margin: 0 15px;
+        }
+        .navigation li a, .navigation li button {
+            text-decoration: none;
+            color: black;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .navigation li button {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .navigation li a:hover, .navigation li button:hover {
+            background-color: green;
+            color: white;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .description {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            color: white;
+        }
+        #P1 {
+            font-size: 50px;
+        }
+        #P2 {
+            font-size: 24px;
+        }
+        .body-derivative {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin-top: -280px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .input-group input:invalid {
+            border-color: red;
+        }
+        .input-group input:invalid + .tooltip {
+            display: block;
+        }
+        .tooltip {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: red;
+            color: white;
+            padding: 5px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .container button {
+            width: 100%;
+            height: 40px;
+            background-color: orangered;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .container button:hover {
+            background-color: black;
+        }
+        footer {
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container-nav">
+        <header>
+            <nav class="navigation" id="navbar">
+                <ul>
+                    <li><button class="dropbtn1"><a href="Home.html" >Home</a></button></li>
+                    <li><button class="dropbtn2">About Us</button></li>
+                    <li class="dropdown">
+                        <button class="dropbtn">Contact Us</button>
+                        <div class="dropdown-content">
+                            <a href="#">Instagram</a>
+                            <a href="#">Facebook</a>
+                            <a href="#">Whatsapp</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <div class="description">
+        <p id="P1">Derivative Calculator</p>
+        <p id="P2">This intuitive and easy-to-use tool is designed to help you calculate the derivative of any function at a specific point.<br>
+            Features:<br>
+            Function Input: Enter any mathematical function in terms of x.<br>
+            Point of Derivation: Specify the point at which you want to find the derivative.<br>
+            Accurate Results: Our calculator uses numerical differentiation for precise results.<br>
+            User-Friendly Interface: Clean design and simple inputs make it easy for anyone to use.<br></p>
+    </div>
+    <div class="body-derivative">
+        <div class="container">
+            <div class="input-group">
+                <label for="function">Function (in terms of x):</label>
+                <input type="text" id="function" placeholder="e.g. x*x + 2*x + 1" oninput="validateAndCalculate()">
+                <div class="tooltip">Invalid function format</div>
+            </div>
+            <div class="input-group">
+                <label for="point">Point (x):</label>
+                <input type="number" id="point" placeholder="e.g. 1" oninput="validateAndCalculate()">
+                <div class="tooltip">Invalid point value</div>
+            </div>
+            <button onclick="calculateDerivative()">Calculate Derivative</button>
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+    <footer>
+        © 2024 Math Operations. All rights reserved.
+    </footer>
+
+    <script>
+        function calculateDerivative() {
+    const funcStr = document.getElementById('function').value;
+    const point = parseFloat(document.getElementById('point').value);
+    
+    const func = new Function('x', `return ${funcStr}`);
+
+    const h = 0.00001; 
+    const derivative = (func(point + h) - func(point - h)) / (2 * h);
+
+    const roundedDerivative = derivative.toFixed(3);
+
+    document.getElementById('result').textContent = roundedDerivative;
+}
+
+    </script>
+</body>
+</html>

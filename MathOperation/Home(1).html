@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home Page</title>
+    <style>
+        body {
+            background-image: url(https://wallpapers.com/images/hd/wise-math-operation-symbols-abstract-xia9fh4gmz33vug5.jpg);
+            margin: 0; 
+            opacity: 1;
+            font-family: cursive;
+        } 
+        * {
+            box-sizing: border-box;
+        }
+        .navigation {
+            background-color: rgb(255, 255, 255);
+            padding: 0;
+            margin: 0;
+        }
+        .navigation ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;    
+        }
+        .navigation li {
+            float: left;
+            padding: 30px;
+        }
+        .navigation li button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .dropbtn {
+            border: none;
+            border-radius: 25px;
+            
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            border: none;
+            border-radius: 25px;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropbtn{
+          background-color: green;
+          color: white;
+          transition: background-color 2s ease;
+        }
+        .dropbtn1:hover {
+          background-color: green;
+          color: white;
+          transition: background-color 2s ease;
+          border-radius: 25px;
+        }
+        .dropbtn2:hover {
+          background-color: green;
+          color: white;
+          transition: background-color 2s ease;
+          border-radius: 25px;
+        }
+        .description{
+          text-align: center;
+          margin-top: 20px;
+          padding: 20px;
+        }
+        #P1{
+          font-size: 70px;
+          color: white;
+          text-align: center;
+          margin-top: -40px;
+          text-shadow: 3px 4px 5px black;
+        }
+        #P2{
+          color: white;
+          text-align: center;
+          font-size: 30px;
+          margin-top: -20px;
+          text-shadow: 3px 4px 5px black;
+        }
+        .card-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh;
+        }
+
+        .container_cards {
+            display: grid;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1000px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.2s;
+            width: 300px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .card h2 {
+            margin: 15px 0;
+            font-size: 1.5em;
+        }
+
+        .card p {
+            color: #888;
+            font-size: 1.2em;
+        }
+
+        .card button {
+            background-color: orangered;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.2s;
+        }
+
+        .card button:hover {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="navigation" id="navbar">
+                
+                <ul>
+                    <li><button class="dropbtn1" style="list-style: none;"><a href="Home.html">Home</a></button></li>
+                    <li><button class="dropbtn2">About Us</button></li>
+                    <li class="dropdown">
+                        <button class="dropbtn">Contact Us</button>
+                        <div class="dropdown-content">
+                            <a href="#">Instagram</a>
+                            <a href="#">Facebook</a>
+                            <a href="#">Whatsapp</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <div class="description">
+          <p id="P1">Welcome To Math Operations</p>
+          <p id="P2">Explore the world of mathematics effortlessly with our interactive website dedicated to various mathematical operations. Whether its integration,Calculus or finding Derivative our intuitive interface makes it simple.<br>
+          </p>
+        </div>
+        <div class="card-body">
+            <div class="container_cards" style="padding: 12px;">
+                <div class="card">
+                    <img src="https://i.pinimg.com/originals/93/d4/24/93d4247202fff20e8b20a210abef8ebc.jpg" alt="Derivative" style="width: 300px;height: 250px;">
+                    <h2>Derivative</h2>
+                    <p></p>
+                    <button><a href="Derivation.html"> Details</a></button>
+                </div>
+                <div class="card">
+                    <img src="Integration.jpg" alt="Integration " style="width: 300px;height: 250px;">
+                    <h2>Integration</h2>
+                    <p></p>
+                    <button><a href="Integration.html" style="list-style: none;">View Details </a></button>
+                </div>
+                <div class="card">
+                    <img src="https://i.ytimg.com/vi/5auYlj4n1aM/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGcgZyhnMA8=&rs=AOn4CLC3hjdouBzDK8hvwNoxK_RsWn7ViA" alt="Calculus" style="width: 300px;height: 250px;">
+                    <h2>Laplace transform</h2>
+                    <p></p>
+                    <button><a href="Laplace.html">View Details</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

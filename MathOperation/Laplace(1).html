@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derivative Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+        }
+        .calculator-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .calculator-container h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .calculator-container input, .calculator-container button {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+        }
+        .calculator-container button {
+            background: #0072ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .calculator-container button:hover {
+            background: #005bb5;
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Derivative Calculator</h1>
+        <input type="text" id="function" placeholder="Enter function f(x)">
+        <input type="number" id="point" placeholder="Enter point x">
+        <button onclick="calculateDerivative()">Calculate Derivative</button>
+        <div class="result-container">
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateDerivative() {
+            const funcStr = document.getElementById('function').value;
+            const point = parseFloat(document.getElementById('point').value);
+            
+            const func = new Function('x', `return ${funcStr}`);
+
+            const h = 0.00001; 
+            const derivative = (func(point + h) - func(point - h)) / (2 * h);
+
+            const roundedDerivative = derivative.toFixed(3);
+
+            document.getElementById('result').textContent = roundedDerivative;
+        }
+    </script>
+</body>
+</html>
